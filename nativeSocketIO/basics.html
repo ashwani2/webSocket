@@ -1,0 +1,25 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.js" integrity="sha512-YeeA/Qxn5hYdkukScTCNNOhTrv1C2RubAGButJ1rmgQwZf/HdRaCGl+JAVkqsqaNRaYNHdheiuKKuPf9mDcqKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script>
+//   let ws = new WebSocket("ws://localhost:8000");
+const socket=io("http://localhost:8000")
+  console.log(socket);
+
+  // we will have to add the CDN of socket io to inject the socket variable into window object 
+
+//   ws.onopen = (event) => {
+//     console.log(event);
+//     ws.send("I am connected to the server");
+//   };
+
+socket.on('connect',(data)=>{
+    socket.on('welcome',(message)=>{
+        console.log(message)
+    })
+
+    socket.emit('message',{data:"I am connected to the server"})
+})
+
+
+//   ws.onmessage = (message) => {
+//     console.log(message.data);
+//   };
+</script>
