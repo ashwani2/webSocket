@@ -18,7 +18,12 @@ io.on("connection", (socket) => {
     console.log(dataFromClient);
   });
 
-  socket.on("ping", () => console.log("ping"));
+//   socket.on("ping", () => console.log("ping"));
 
-  setInterval(() => socket.emit("ping"), 1000);
+//   setInterval(() => socket.emit("ping"), 1000);
+  socket.on("newMessageToServer",(msg)=>{
+    console.log(msg)
+    io.emit('messageToClients',{text:msg.text})   // we have used io because we wanted to send this to all clients connected to that socket
+  })
+
 });
