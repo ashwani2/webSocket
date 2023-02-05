@@ -1,0 +1,20 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    let socket=io("http://localhost:9000")
+
+    socket.on("messageFromServer",(datafromServer)=>{
+        console.log(datafromServer)
+        socket.emit("messageToServer",{data:"This is message from Client"})
+    })
+
+    socket.io.engine.on("packet",(packet)=>{
+        if(packet.type==='ping'){
+           console.log("Ping was recieved from server")
+        }
+    })
+
+    socket.io.engine.on("pong",()=>{
+        // console.log(latency)
+        console.log("Pong was sent to the server")
+    })
+</script>
